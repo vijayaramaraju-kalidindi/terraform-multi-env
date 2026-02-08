@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "google" {
-  project = "nomadic-genre-486711-h6"
+  project = var.project_id
   credentials = file("key.json")
   region  = "us-central1"
 }
@@ -30,6 +30,19 @@ module "compute" {
 }
 
 module "storage" {
-  source     = "./modules/storage"
+  source     = "../../modules/storage"
   project_id = var.project_id
+}
+
+resource "google_project_service" "sql_api" {
+  service = "sqladmin.googleapis.com"
+}
+
+module "cloudsql" {
+  source        = "../../modules/cloudsql"
+  instance_name = "dev-mysql"
+  region        = var.region
+  tier          = "db-f1-micro"
+
+  depends_on = [google_project_service.sql_api]
 }
