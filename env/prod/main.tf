@@ -19,3 +19,4 @@ module "compute" {
   zone          = "us-central1-a"
   subnet_id     = module.network.subnet_id
 }
+
