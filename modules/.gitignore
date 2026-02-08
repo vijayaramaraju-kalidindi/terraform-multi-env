@@ -1,0 +1,15 @@
+# Ignore the local state files (since you're using GCS now)
+*.tfstate
+*.tfstate.*
+crash.log
+crash.log.*
+
+# Ignore the JSON key files (Secrets)
+*.json
+
+# Ignore the Terraform directory (contains providers and plugins)
+.terraform/
+
+# Ignore variables files that might contain secrets
+*.tfvars
+*.tfvars.json
