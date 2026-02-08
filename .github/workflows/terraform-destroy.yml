@@ -1,14 +1,16 @@
-name: Terraform Destroy
+name: Terraform Dev Destroy
 
 on:
-  workflow_dispatch: # This adds a manual "Run workflow" button in GitHub Actions
+  workflow_dispatch:   # manual trigger from GitHub UI
 
 jobs:
-  destroy:
+  terraform-destroy:
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: env/dev
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,7 +19,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Authenticate to GCP
-        uses: 'google-github-actions/auth@v2'
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
