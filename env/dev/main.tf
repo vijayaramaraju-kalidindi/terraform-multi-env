@@ -9,7 +9,7 @@ terraform {
 
 provider "google" {
   project = "nomadic-genre-486711-h6"
-#  credentials = file("key.json")
+  credentials = file("key.json")
   region  = "us-central1"
 }
 
@@ -29,3 +29,7 @@ module "compute" {
   subnet_id     = module.network.subnet_id
 }
 
+module "storage" {
+  source     = "./modules/storage"
+  project_id = var.project_id
+}
