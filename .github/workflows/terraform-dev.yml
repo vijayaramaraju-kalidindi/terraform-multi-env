@@ -1,12 +1,6 @@
 name: Terraform Dev CI
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'env/dev/**'
-      - 'modules/**'
+on: [push]
 
 jobs:
   terraform:
