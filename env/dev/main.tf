@@ -13,6 +13,11 @@ provider "google" {
   region  = "us-central1"
 }
 
+resource "google_project_service" "service_networking" {
+  service = "servicenetworking.googleapis.com"
+}
+
+
 module "network" {
   source      = "../../modules/network"
   vpc_name    = "dev-vpc"
@@ -37,7 +42,6 @@ module "storage" {
 resource "google_project_service" "sql_api" {
   service = "sqladmin.googleapis.com"
 }
-
 module "cloudsql" {
   source        = "../../modules/cloudsql"
   instance_name = "dev-mysql"
