@@ -13,8 +13,7 @@ resource "google_sql_database_instance" "mysql" {
 
   deletion_protection = false
 }
-<<<<<<< Updated upstream
-=======
+
 
 resource "google_sql_database" "app_db" {
   name     = "app_database"
@@ -26,4 +25,4 @@ resource "google_sql_user" "app_user" {
   instance = google_sql_database_instance.mysql.name
   password = "StrongPassword123!"
 }
->>>>>>> Stashed changes
+
