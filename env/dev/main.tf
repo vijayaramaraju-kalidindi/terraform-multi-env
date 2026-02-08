@@ -9,6 +9,7 @@ terraform {
 
 provider "google" {
   project = "nomadic-genre-486711-h6"
+#  credentials = file("key.json")
   region  = "us-central1"
 }
 

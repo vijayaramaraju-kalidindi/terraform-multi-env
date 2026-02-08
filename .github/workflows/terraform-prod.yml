@@ -1,20 +1,21 @@
-name: Terraform Dev CI
+name: Terraform Prod CI
 
 on: 
  push:
     branches:
       - main
     paths:
-      - 'env/dev/**'
+      - 'env/prod/**'
       - 'modules/**'
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    environment: prod
 
     defaults:
       run:
-        working-directory: env/dev
+        working-directory: env/prod
 
     steps:
       - name: Checkout code
@@ -36,5 +37,3 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
