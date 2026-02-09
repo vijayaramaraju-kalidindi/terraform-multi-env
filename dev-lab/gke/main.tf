@@ -16,19 +16,24 @@ data "terraform_remote_state" "network" {
   }
 }
 
+
 resource "google_container_cluster" "cluster" {
   name     = var.cluster_name
   location = var.region
   deletion_protection = false
   network    = data.terraform_remote_state.network.outputs.vpc_id
   subnetwork = data.terraform_remote_state.network.outputs.subnet_id
-
   remove_default_node_pool = true
   initial_node_count       = 1
 
+  # Add this block to bypass SSD quota during initial creation
+  node_config {
+    disk_type    = "pd-standard"
+    disk_size_gb = 20 
+  }
+
   depends_on = [google_project_service.gke_api]
 }
-
 resource "google_container_node_pool" "primary_nodes" {
   name     = var.node_pool_name
   cluster  = google_container_cluster.cluster.name
